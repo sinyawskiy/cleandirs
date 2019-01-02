@@ -12,7 +12,11 @@ def find_products():
     for sub_dir in os.listdir(home_dir):
         for product in products:
             if sub_dir.startswith('.{}'.format(product)):
-                version_arr = version_re.findall(sub_dir)[0].split('.')
+                print(sub_dir)
+                try:
+                    version_arr = version_re.findall(sub_dir)[0].split('.')
+                except IndexError: # if .PyCharm20
+                    version_arr = [sub_dir, '']
                 find_products.append({
                     'path': os.path.join(home_dir, sub_dir),
                     'product': product,
